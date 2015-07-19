@@ -27,8 +27,7 @@ activity <- read.csv("./activity.csv")
 act1 <- summarise(group_by(activity, date), sum = sum(steps, na.rm=TRUE))
 hist(act1$sum, 
      main="Histogram of Sum of Steps Per Day", 
-     xlab="Steps Per Day", 
-     breaks=nlevels(act1$date))
+     xlab="Steps Per Day")
 ```
 
 * Calculate and report the mean and median of the total number of steps taken per day
@@ -87,8 +86,7 @@ act3 <- arrange(act3, date, interval)
 act3A <- ddply(act3, "date", summarise, sum=sum(steps))
 hist(act3A$sum, 
      main="Histogram of Sum of Steps Per Day", 
-     xlab="Steps Per Day", 
-     breaks=nlevels(act3$date))
+     xlab="Steps Per Day")
 mean(act3A$sum); mean1
 median(act3A$sum); median1
 ## The effect is to drive the mean closer to the median.

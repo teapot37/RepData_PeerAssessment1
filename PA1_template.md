@@ -29,20 +29,28 @@ activity <- read.csv("./activity.csv")
 act1 <- summarise(group_by(activity, date), sum = sum(steps, na.rm=TRUE))
 hist(act1$sum, 
      main="Histogram of Sum of Steps Per Day", 
-     xlab="Steps Per Day", 
-     breaks=nlevels(act1$date))
+     xlab="Steps Per Day")
 ```
 
-```
-## Error in hist.default(act1$sum, main = "Histogram of Sum of Steps Per Day", : invalid number of 'breaks'
-```
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 * Calculate and report the mean and median of the total number of steps taken per day
 
 
 ```r
-mean1 <- mean(act1$sum)
-median1 <- median(act1$sum)
+mean1 <- mean(act1$sum); mean1
+```
+
+```
+## [1] 570608
+```
+
+```r
+median1 <- median(act1$sum); median1
+```
+
+```
+## [1] 570608
 ```
 
 # What is the average daily activity pattern?
@@ -112,8 +120,7 @@ act3 <- arrange(act3, date, interval)
 act3A <- ddply(act3, "date", summarise, sum=sum(steps))
 hist(act3A$sum, 
      main="Histogram of Sum of Steps Per Day", 
-     xlab="Steps Per Day", 
-     breaks=nlevels(act3$date))
+     xlab="Steps Per Day")
 ```
 
 ![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 

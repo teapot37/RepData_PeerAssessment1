@@ -34,8 +34,8 @@ hist(act1$sum,
 * Calculate and report the mean and median of the total number of steps taken per day
 
 ```{r}
-mean1 <- mean(act1$sum)
-median1 <- median(act1$sum)
+mean1 <- mean(act1$sum); mean1
+median1 <- median(act1$sum); median1
 ```
 
 # What is the average daily activity pattern?

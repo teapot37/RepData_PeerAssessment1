@@ -11,6 +11,7 @@ Show any code that is needed to
 ```{r}
 library("plyr")
 library("dplyr")
+unzip("./activity.zip", "activity.csv")
 activity <- read.csv("./activity.csv")
 ```
 

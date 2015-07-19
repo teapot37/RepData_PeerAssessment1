@@ -12,6 +12,27 @@ Show any code that is needed to
 ```r
 library("plyr")
 library("dplyr")
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+## 
+## The following objects are masked from 'package:plyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize
+## 
+## The following object is masked from 'package:stats':
+## 
+##     filter
+## 
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 unzip("./activity.zip", "activity.csv")
 activity <- read.csv("./activity.csv")
 ```
@@ -26,7 +47,7 @@ activity <- read.csv("./activity.csv")
 
 
 ```r
-act1 <- summarise(group_by(activity, date), sum = sum(steps, na.rm=TRUE))
+act1 <- ddply(activity, ~interval, transform, sum = sum(steps, na.rm=TRUE))
 hist(act1$sum, 
      main="Histogram of Sum of Steps Per Day", 
      xlab="Steps Per Day")
@@ -42,7 +63,7 @@ mean1 <- mean(act1$sum); mean1
 ```
 
 ```
-## [1] 570608
+## [1] 1981.278
 ```
 
 ```r
@@ -50,7 +71,7 @@ median1 <- median(act1$sum); median1
 ```
 
 ```
-## [1] 570608
+## [1] 1808
 ```
 
 # What is the average daily activity pattern?
@@ -67,9 +88,7 @@ plot(act2$interval,
      ylab="Mean Number of Steps")
 ```
 
-```
-## Error in xy.coords(x, y, xlabel, ylabel, log): 'x' and 'y' lengths differ
-```
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 * Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -79,7 +98,10 @@ act2[which.max(act2$mean),]
 ```
 
 ```
-## [1] 37.3826
+## Source: local data frame [1 x 2]
+## 
+##   interval     mean
+## 1      835 206.1698
 ```
 
 # Imputing missing values
@@ -134,7 +156,7 @@ mean(act3A$sum); mean1
 ```
 
 ```
-## [1] 570608
+## [1] 1981.278
 ```
 
 ```r
@@ -146,11 +168,11 @@ median(act3A$sum); median1
 ```
 
 ```
-## [1] 570608
+## [1] 1808
 ```
 
 ```r
-## The effect is to drive the mean closer to the median.
+## By removing a good number of the 0 values of the data, the mean and median are much greater.
 ```
 
 # Are there differences in activity patterns between weekdays and weekends?

@@ -24,7 +24,7 @@ activity <- read.csv("./activity.csv")
 * If you do not understand the difference between a histogram and a barplot, research the difference between them. Make a histogram of the total number of steps taken each day
 
 ```{r}
-act1 <- summarise(group_by(activity, date), sum = sum(steps, na.rm=TRUE))
+act1 <- ddply(activity, ~interval, transform, sum = sum(steps, na.rm=TRUE))
 hist(act1$sum, 
      main="Histogram of Sum of Steps Per Day", 
      xlab="Steps Per Day")
@@ -89,7 +89,7 @@ hist(act3A$sum,
      xlab="Steps Per Day")
 mean(act3A$sum); mean1
 median(act3A$sum); median1
-## The effect is to drive the mean closer to the median.
+## By removing a good number of the 0 values of the data, the mean and median are much greater.
 ```
 
 # Are there differences in activity patterns between weekdays and weekends?
